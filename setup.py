@@ -8,6 +8,11 @@ setup(name='unitree_sdk2py',
       long_description_content_type="text/markdown",
       license="BSD-3-Clause",
       packages=find_packages(include=['unitree_sdk2py','unitree_sdk2py.*']),
+      # DART 20/10/2026 : les bibliothèques natives du CRC (ctypes) n'étaient pas
+      # installées (find_packages ignore les .so) -> CRC() levait OSError et la
+      # commande bas niveau était impossible (A2-W Pro RAID, cockpit en simulation).
+      package_data={'unitree_sdk2py': ['utils/lib/*.so']},
+      include_package_data=True,
       description='Unitree robot sdk version 2 for python',
       project_urls={
             "Source Code": "https://github.com/unitreerobotics/unitree_sdk2_python",
